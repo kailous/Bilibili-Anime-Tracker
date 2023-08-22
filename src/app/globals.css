@@ -30,3 +30,6 @@
 body {
   background-color: var(--background);
 }
+iframe body {
+  background: none !important;
+}
