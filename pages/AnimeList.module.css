@@ -1,0 +1,65 @@
+/*列表项*/
+.anime-list {
+    list-style: none;
+    padding: 10px;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+.anime-link {
+    display: flex;
+    align-items: flex-start;
+    width: var(--anime-item-width);
+    padding: 0;
+    /*gap: var(--anime-item-gap);*/
+    background: var(--anime-item-background);
+    border-radius: var(--anime-item-border-radius);
+    overflow: hidden;
+}
+.anime-item {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.anime-cover {
+    width: 200px;
+    height: 120px;
+    flex-shrink: 0;
+    object-fit: cover; /* 将内容缩放以填充容器，并保持纵横比 */
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex: 1 0 0;
+    align-self: stretch;
+    padding: var(--anime-item-padding);
+}
+.anime-title, .anime-episode {
+    align-self: stretch;
+    font-family: var(--font-family);
+}
+.anime-title {
+    color: var(--anime-title-color);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 120%; /* 14px */
+}
+
+.anime-episode {
+    color: var(--anime-episode-color);
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 100%; /* 12px */
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
