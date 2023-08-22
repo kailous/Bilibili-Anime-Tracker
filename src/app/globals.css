@@ -20,7 +20,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     /*配色*/
-    --background: #000000; /*背景色*/
+    --background: #191919; /*背景色*/
     --anime-item-background: #333333; /*列表项背景色*/
     --anime-title-color: #ffffff; /*标题颜色*/
     --anime-episode-color: #cccccc; /*集数颜色*/
@@ -29,7 +29,4 @@
 
 body {
   background-color: var(--background);
-}
-iframe body {
-  background: none !important;
 }
