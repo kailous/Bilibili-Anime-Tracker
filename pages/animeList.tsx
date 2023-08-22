@@ -29,7 +29,7 @@ function AnimeList() {
             <ul className={styles['anime-list']}>
                 {animeData.map((anime, index) => (
                     <li className={styles['anime-item']} key={index}>
-                        <a className={styles['anime-link']} href={anime.epUrl}>
+                        <a className={styles['anime-link']} href={anime.epUrl} target={"_blank"}>
                             <img className={styles['anime-cover']} src={anime.epCover} alt={`Cover for ${anime.title}`} />
                             <div className={styles['info']}>
                                 <h2 className={styles['anime-title']}>{anime.title}</h2>
