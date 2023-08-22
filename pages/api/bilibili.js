@@ -1,4 +1,4 @@
-import fetch from 'node-fetch';
+const fetch = require('isomorphic-fetch');
 
 export default async function handler(req, res) {
     const apiUrl = 'https://api.bilibili.com/x/space/bangumi/follow/list?type=1&follow_status=0&pn=1&ps=15&vmid=439605153';
