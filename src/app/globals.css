@@ -4,8 +4,8 @@
 
 :root {
   /*配色*/
-  --background: #F7F7F7; /*背景色*/
-  --anime-item-background: #ffffff; /*列表项背景色*/
+  --background: #FFFFFF; /*背景色*/
+  --anime-item-background: #F7F7F7; /*列表项背景色*/
   --anime-title-color: #000000; /*标题颜色*/
   --anime-episode-color: #383838; /*集数颜色*/
   /*字体*/
