@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router'; // 导入 useRouter
 import Head from 'next/head';
 import styles from './AnimeList.module.css';
-import 'src/app/globals.css'
+import 'src/app/globals.css';
 
 interface Anime {
     title: string;
@@ -12,14 +13,19 @@ interface Anime {
 }
 
 function AnimeList() {
+    const router = useRouter(); // 使用 useRouter 获取路由信息
+    const { uid } = router.query; // 获取查询参数中的 uid 值
+
     const [animeData, setAnimeData] = useState<Anime[]>([]);
 
     useEffect(() => {
-        fetch('/api/bilibili') // 使用你的 API 路由路径
-            .then(response => response.json())
-            .then((data: Anime[]) => setAnimeData(data))
-            .catch(error => console.error('Error fetching data:', error));
-    }, []);
+        if (uid) { // 检查 uid 是否存在
+            fetch(`/api/bilibili?uid=${uid}`) // 将 uid 添加到请求中
+                .then(response => response.json())
+                .then((data: Anime[]) => setAnimeData(data))
+                .catch(error => console.error('Error fetching data:', error));
+        }
+    }, [uid]);
 
     return (
         <div>
