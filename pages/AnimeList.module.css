@@ -1,6 +1,7 @@
 /* pages/AnimeList.module.css */
 /* Bilibili 番剧列表样式 */
 
+/* 番剧列表容器 */
 .anime-list {
     list-style: none;
     padding: 10px;
@@ -11,6 +12,7 @@
     flex-wrap: wrap;
     justify-content: flex-start;
 }
+/* 番剧列表项容器 */
 .anime-link {
     display: flex;
     align-items: flex-start;
@@ -18,22 +20,23 @@
     padding: 0;
     /*gap: var(--anime-item-gap);*/
     background: var(--anime-item-background);
-    border-radius: var(--anime-item-border-radius);
+    border-radius: var(--big-radius); /*大圆角*/
     overflow: hidden;
 }
+/* 番剧列表项 */
 .anime-item {
     display: inline-flex;
     flex-direction: column;
     align-items: flex-start;
 }
-
+/* 番剧封面 */
 .anime-cover {
     width: 200px;
     height: 120px;
     flex-shrink: 0;
     object-fit: cover; /* 将内容缩放以填充容器，并保持纵横比 */
 }
-
+/* 番剧信息 */
 .info {
     display: flex;
     flex-direction: column;
@@ -44,49 +47,61 @@
     padding: var(--anime-item-padding);
 }
 .anime-title, .anime-episode {
+    /* 番剧标题和集数 */
     align-self: stretch;
     font-family: var(--font-family);
+    font-style: normal;
 }
 .anime-title {
+    /* 番剧标题 */
     color: var(--anime-title-color);
     font-size: 14px;
-    font-style: normal;
     font-weight: 500;
     line-height: 120%; /* 14px */
 }
-
 .anime-episode {
+    /* 集数 */
     color: var(--anime-episode-color);
     font-size: 12px;
-    font-style: normal;
     font-weight: 400;
     line-height: 100%; /* 12px */
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
-.anime-episode p {display: -webkit-box;
+/* 限制标题和集数的行数 */
+.anime-episode p, .anime-title h2 {
+    display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
     align-self: stretch;
     overflow: hidden;
 }
+.anime-title h2 {
+    /* 限制标题最多显示两行 */
+    -webkit-line-clamp: 2;
+}
+.anime-episode p {
+    /* 限制集数最多显示一行 */
+    -webkit-line-clamp: 1;
+}
+/* 未追完的番剧进度文字 */
 .anime-episode span.watched-episode {
     color: var(--highlight-color);
     font-weight: 800;
 }
-/* styles.css */
+/* 进度条 */
 .progress-bar {
+    /* 轨道 */
     width: 100%;
     height: 5px;
     background-color: var(--background);
     margin-top: 5px;
     position: relative;
     overflow: hidden;
-    border-radius: 5px;
+    border-radius: var(--small-radius); /*小圆角*/
 }
-
 .progress {
+    /* 进度 */
     height: 100%;
     background-color: var(--highlight-color);
 }

@@ -15,7 +15,9 @@
   --anime-item-width: 400px; /*列表项宽度*/
   --anime-item-padding: 15px; /*列表项内边距*/
   --anime-item-gap: 15px; /*列表项间距*/
-  --anime-item-border-radius: 15px; /*列表项圆角*/
+  /*圆角*/
+  --big-radius: 15px; /*大圆角*/
+  --small-radius: 5px; /*小圆角*/
 }
 
 @media (prefers-color-scheme: dark) {
