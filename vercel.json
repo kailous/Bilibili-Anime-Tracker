@@ -1,0 +1,13 @@
+{
+  "build": {
+    "env": {
+      "REACT_APP_UUID": "@REACT_APP_UUID",
+      "REACT_APP_Buvid3": "@REACT_APP_Buvid3",
+      "REACT_APP_SID": "@REACT_APP_SID",
+      "REACT_APP_DedeUserID": "@REACT_APP_DedeUserID",
+      "REACT_APP_DedeUserID_ckMd5": "@REACT_APP_DedeUserID_ckMd5",
+      "REACT_APP_SESSDATA": "@REACT_APP_SESSDATA",
+      "REACT_APP_bili_jct": "@REACT_APP_bili_jct"
+    }
+  }
+}

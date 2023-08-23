@@ -1,4 +1,6 @@
-/*列表项*/
+/* pages/AnimeList.module.css */
+/* Bilibili 番剧列表样式 */
+
 .anime-list {
     list-style: none;
     padding: 10px;
@@ -62,4 +64,29 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
+}
+.anime-episode p {display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    align-self: stretch;
+    overflow: hidden;
+}
+.anime-episode span.watched-episode {
+    color: var(--highlight-color);
+    font-weight: 800;
+}
+/* styles.css */
+.progress-bar {
+    width: 100%;
+    height: 5px;
+    background-color: var(--background);
+    margin-top: 5px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.progress {
+    height: 100%;
+    background-color: var(--highlight-color);
 }
