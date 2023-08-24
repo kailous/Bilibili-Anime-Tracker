@@ -36,7 +36,7 @@ function Index() {
     }, []);
 
     return (
-        <div>
+        <div className={styles['box']}>
             <Head>
                 <meta name="referrer" content="never"/>
             </Head>
@@ -50,7 +50,7 @@ function Index() {
                             <img className={styles['anime-cover']} src={anime.epCover}
                                  alt={`Cover for ${anime.title}`}/>
                             <div className={styles['info']}>
-                                <h2 className={styles['anime-title']}>{anime.title}</h2>
+                                <p className={styles['anime-title']}>{anime.title}</p>
                                 <div className={styles['anime-episode']}>
 
                                     {/*// 看完的和没看完的显示不同的内容*/}

@@ -12,7 +12,7 @@
   /*字体*/
   --font-family: Noto Sans SC, sans-serif; /*字体*/
   /*布局参数*/
-  --anime-item-width: 400px; /*列表项宽度*/
+  --anime-item-width: 350px; /*列表项宽度*/
   --anime-item-padding: 15px; /*列表项内边距*/
   --anime-item-gap: 15px; /*列表项间距*/
   /*圆角*/
@@ -33,3 +33,9 @@
 body {
   background-color: var(--background);
 }
+/*4k分辨率*/
+/*@media (min-width: 3840px) {*/
+/*  :root {*/
+/*    --anime-item-width: 415px; !*列表项宽度*!*/
+/*  }*/
+/*}*/

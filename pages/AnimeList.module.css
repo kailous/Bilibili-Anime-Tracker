@@ -1,33 +1,35 @@
 /* pages/AnimeList.module.css */
 /* Bilibili 番剧列表样式 */
 
+.box {
+    width: 100%;
+}
 /* 番剧列表容器 */
 .anime-list {
     list-style: none;
+    width: 100%;
     padding: 10px;
     margin: 0;
     display: flex;
-    flex-direction: row;
     gap: 10px;
+    justify-content: space-between;
     flex-wrap: wrap;
-    justify-content: flex-start;
+}
+/* 番剧列表项 */
+.anime-item {
+    flex: 1;
+    flex-basis: 0;
+    min-width: var(--anime-item-width) !important;
 }
 /* 番剧列表项容器 */
 .anime-link {
     display: flex;
     align-items: flex-start;
-    width: var(--anime-item-width);
     padding: 0;
     /*gap: var(--anime-item-gap);*/
     background: var(--anime-item-background);
     border-radius: var(--big-radius); /*大圆角*/
     overflow: hidden;
-}
-/* 番剧列表项 */
-.anime-item {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: flex-start;
 }
 /* 番剧封面 */
 .anime-cover {
@@ -70,13 +72,13 @@
     gap: 5px;
 }
 /* 限制标题和集数的行数 */
-.anime-episode p, .anime-title h2 {
+.info p {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     align-self: stretch;
-    overflow: hidden;
+    overflow: hidden !important;
 }
-.anime-title h2 {
+.anime-title {
     /* 限制标题最多显示两行 */
     -webkit-line-clamp: 2;
 }
