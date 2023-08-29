@@ -58,8 +58,8 @@ export default async function handler(req, res) {
 
             // 从 API 响应中提取所需的数据
             const programs = await Promise.all(programList.map(async program => {
-                const hslColor = await getDarkenedHSLColorjpg(program.new_ep.cover);
-                const hslColor2 = await getDarkenedHSLColorpng(program.new_ep.cover);
+                const ColorJpg = await getDarkenedHexColorJpg(program.new_ep.cover);
+                const ColorPng = await getDarkenedHexColorPng(program.new_ep.cover);
                 return {
                     title: program.title,
                     epNum: program.new_ep.index_show,
@@ -70,7 +70,7 @@ export default async function handler(req, res) {
                     epTime: extractTimeFromProgress(program.progress),
                     epStart: extractNumberFromString(program.progress),
                     epEnd: extractNumberFromString(program.new_ep.index_show),
-                    epDarkenedColor: hslColor || hslColor2,
+                    epDarkenedColor: ColorJpg || ColorPng,
                 };
             }));
 
@@ -89,8 +89,8 @@ export default async function handler(req, res) {
     }
 }
 
-// 异步函数：获取降低明度后的 HSL 色值
-async function getDarkenedHSLColorpng(coverUrl) {
+// 异步函数：获取降低明度后的 HEX 颜色值（PNG 格式）
+async function getDarkenedHexColorPng(coverUrl) {
     try {
         const response = await fetch(coverUrl);
         if (!response.ok) {
@@ -101,16 +101,23 @@ async function getDarkenedHSLColorpng(coverUrl) {
         const colors = await getColors(buffer, 'image/png'); // 根据图片类型进行调整
         const rgbColor = colors[0].rgb();
 
-        const hslColor = colorConvert.rgb.hsl(rgbColor[0], rgbColor[1], rgbColor[2]);
-        hslColor[2] = Math.round(hslColor[2] * 0.7); // 降低 30% 明度并四舍五入到整数
+        // 降低明度并将颜色转换为 HEX 格式
+        const darkenedRgbColor = [
+            rgbColor[0],
+            rgbColor[1],
+            Math.round(rgbColor[2] * 0.7) // 降低 30% 明度并四舍五入到整数
+        ];
+        const darkenedHexColor = colorConvert.rgb.hex(darkenedRgbColor[0], darkenedRgbColor[1], darkenedRgbColor[2]);
 
-        return hslColor;
+        return `#${darkenedHexColor}`; // 在前面添加 #
     } catch (error) {
         console.error('获取图片颜色时出错:', error);
         return null;
     }
 }
-async function getDarkenedHSLColorjpg(coverUrl) {
+
+// 异步函数：获取降低明度后的 HEX 颜色值（JPG 格式）
+async function getDarkenedHexColorJpg(coverUrl) {
     try {
         const response = await fetch(coverUrl);
         if (!response.ok) {
@@ -118,13 +125,18 @@ async function getDarkenedHSLColorjpg(coverUrl) {
         }
         const buffer = await response.buffer();
 
-        const colors2 = await getColors(buffer, 'image/jpg'); // 根据图片类型进行调整
+        const colors2 = await getColors(buffer, 'image/jpeg'); // 根据图片类型进行调整
         const rgbColor2 = colors2[0].rgb();
 
-        const hslColor2 = colorConvert.rgb.hsl(rgbColor2[0], rgbColor2[1], rgbColor2[2]);
-        hslColor2[2] = Math.round(hslColor2[2] * 0.7); // 降低 30% 明度并四舍五入到整数
+        // 降低明度并将颜色转换为 HEX 格式
+        const darkenedRgbColor2 = [
+            rgbColor2[0],
+            rgbColor2[1],
+            Math.round(rgbColor2[2] * 0.7) // 降低 30% 明度并四舍五入到整数
+        ];
+        const darkenedHexColor2 = colorConvert.rgb.hex(darkenedRgbColor2[0], darkenedRgbColor2[1], darkenedRgbColor2[2]);
 
-        return hslColor2;
+        return `#${darkenedHexColor2}`; // 在前面添加 #
     } catch (error) {
         console.error('获取图片颜色时出错:', error);
         return null;
