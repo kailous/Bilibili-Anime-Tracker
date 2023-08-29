@@ -2,6 +2,9 @@
 // 从 Bilibili API 获取番剧列表
 
 import fetch from 'isomorphic-fetch';
+import colorConvert from 'color-convert';
+import getColors from 'get-image-colors';
+
 
 // 从字符串中提取数字
 function extractNumberFromString(str) {
@@ -54,16 +57,21 @@ export default async function handler(req, res) {
             const programList = data.data.list;
 
             // 从 API 响应中提取所需的数据
-            const programs = programList.map(program => ({
-                title: program.title,
-                epNum: program.new_ep.index_show,
-                epTitle: program.new_ep.long_title,
-                epCover: program.new_ep.cover,
-                epUrl: program.url,
-                epProgress: removeTimeFromProgress(program.progress),
-                epTime: extractTimeFromProgress(program.progress),
-                epStart:extractNumberFromString(program.progress),
-                epEnd: extractNumberFromString(program.new_ep.index_show),
+            const programs = await Promise.all(programList.map(async program => {
+                const hslColor = await getDarkenedHSLColorjpg(program.new_ep.cover);
+                const hslColor2 = await getDarkenedHSLColorpng(program.new_ep.cover);
+                return {
+                    title: program.title,
+                    epNum: program.new_ep.index_show,
+                    epTitle: program.new_ep.long_title,
+                    epCover: program.new_ep.cover,
+                    epUrl: program.url,
+                    epProgress: removeTimeFromProgress(program.progress),
+                    epTime: extractTimeFromProgress(program.progress),
+                    epStart: extractNumberFromString(program.progress),
+                    epEnd: extractNumberFromString(program.new_ep.index_show),
+                    epDarkenedColor: hslColor || hslColor2,
+                };
             }));
 
             // 将数据作为 JSON 响应发送
@@ -78,5 +86,47 @@ export default async function handler(req, res) {
 
         // 如果不是 GET 请求，返回错误
         res.status(405).json({ error: '方法不允许' });
+    }
+}
+
+// 异步函数：获取降低明度后的 HSL 色值
+async function getDarkenedHSLColorpng(coverUrl) {
+    try {
+        const response = await fetch(coverUrl);
+        if (!response.ok) {
+            throw new Error('无法获取图片');
+        }
+        const buffer = await response.buffer();
+
+        const colors = await getColors(buffer, 'image/png'); // 根据图片类型进行调整
+        const rgbColor = colors[0].rgb();
+
+        const hslColor = colorConvert.rgb.hsl(rgbColor[0], rgbColor[1], rgbColor[2]);
+        hslColor[2] = Math.round(hslColor[2] * 0.7); // 降低 30% 明度并四舍五入到整数
+
+        return hslColor;
+    } catch (error) {
+        console.error('获取图片颜色时出错:', error);
+        return null;
+    }
+}
+async function getDarkenedHSLColorjpg(coverUrl) {
+    try {
+        const response = await fetch(coverUrl);
+        if (!response.ok) {
+            throw new Error('无法获取图片');
+        }
+        const buffer = await response.buffer();
+
+        const colors2 = await getColors(buffer, 'image/jpg'); // 根据图片类型进行调整
+        const rgbColor2 = colors2[0].rgb();
+
+        const hslColor2 = colorConvert.rgb.hsl(rgbColor2[0], rgbColor2[1], rgbColor2[2]);
+        hslColor2[2] = Math.round(hslColor2[2] * 0.7); // 降低 30% 明度并四舍五入到整数
+
+        return hslColor2;
+    } catch (error) {
+        console.error('获取图片颜色时出错:', error);
+        return null;
     }
 }
