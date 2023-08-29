@@ -103,9 +103,9 @@ async function getDarkenedHexColorPng(coverUrl) {
 
         // 降低明度并将颜色转换为 HEX 格式
         const darkenedRgbColor = [
-            rgbColor[0],
-            rgbColor[1],
-            Math.round(rgbColor[2] * 0.7) // 降低 30% 明度并四舍五入到整数
+            Math.round(rgbColor[0] * 0.5), // 降低 30% 红色分量并四舍五入到整数
+            Math.round(rgbColor[1] * 0.5), // 降低 30% 绿色分量并四舍五入到整数
+            Math.round(rgbColor[2] * 0.5)  // 降低 30% 蓝色分量并四舍五入到整数
         ];
         const darkenedHexColor = colorConvert.rgb.hex(darkenedRgbColor[0], darkenedRgbColor[1], darkenedRgbColor[2]);
 
@@ -130,9 +130,9 @@ async function getDarkenedHexColorJpg(coverUrl) {
 
         // 降低明度并将颜色转换为 HEX 格式
         const darkenedRgbColor2 = [
-            rgbColor2[0],
-            rgbColor2[1],
-            Math.round(rgbColor2[2] * 0.7) // 降低 30% 明度并四舍五入到整数
+            Math.round(rgbColor2[0] * 0.5), // 降低 30% 红色分量并四舍五入到整数
+            Math.round(rgbColor2[1] * 0.5), // 降低 30% 绿色分量并四舍五入到整数
+            Math.round(rgbColor2[2] * 0.5)  // 降低 30% 蓝色分量并四舍五入到整数
         ];
         const darkenedHexColor2 = colorConvert.rgb.hex(darkenedRgbColor2[0], darkenedRgbColor2[1], darkenedRgbColor2[2]);
 
